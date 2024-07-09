@@ -5,9 +5,12 @@ import {
     UserFilled,
     User,
     Crop,
+    Dish,
     EditPen,
     SwitchButton,
-    CaretBottom
+    CaretBottom,
+    Wallet,
+    ForkSpoon
 } from '@element-plus/icons-vue'
 import avatar from '@/assets/default.png'
 
@@ -86,9 +89,21 @@ const handleCommand = (command)=>{
                 </el-menu-item>
                 <el-menu-item index="/article/manage">
                     <el-icon>
-                        <Promotion />
+                        <Dish />
                     </el-icon>
                     <span>食品管理</span>
+                </el-menu-item>
+                <el-menu-item index="/desk">
+                    <el-icon>
+                        <ForkSpoon />
+                    </el-icon>
+                    <span>餐桌管理</span>
+                </el-menu-item>
+                <el-menu-item index="/foodorder">
+                    <el-icon>
+                        <Wallet />
+                    </el-icon>
+                    <span>订单管理</span>
                 </el-menu-item>
                 <el-sub-menu >
                     <template #title>
@@ -150,7 +165,7 @@ const handleCommand = (command)=>{
                 <router-view></router-view>
             </el-main>
             <!-- 底部区域 -->
-            <el-footer>@ 文章@用户 @</el-footer>
+            <el-footer>吃饱了才有力气减肥</el-footer>
         </el-container>
     </el-container>
 </template>
