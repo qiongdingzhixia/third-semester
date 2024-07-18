@@ -4,16 +4,19 @@ body {
 }
 
 /* fade-slide */
+//0.3秒平滑过渡
 .fade-slide-leave-active,
 .fade-slide-enter-active {
   transition: all 0.3s;
 }
 
+//初始时元素会向左移动并且不可见。
 .fade-slide-enter-from {
   transform: translateX(-30px);
   opacity: 0;
 }
 
+//元素在离开时向右移动并逐渐变得不可见。
 .fade-slide-leave-to {
   transform: translateX(30px);
   opacity: 0;

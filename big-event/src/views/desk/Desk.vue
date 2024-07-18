@@ -1,7 +1,8 @@
 <script setup>
 import {
     Edit,
-    Delete
+    Delete,
+    ForkSpoon
 } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 
@@ -15,6 +16,7 @@ const desks = ref([
         "updateTime": "2023-09-02 12:06:59"
     }
 ])
+
 //声明数据模型
 const deskModel = ref({
     title: '',
@@ -140,6 +142,7 @@ const deleteDesk = (row) => {
             })
         })
 }
+
 </script>
 <template>
     <el-card class="page-container">
@@ -171,7 +174,7 @@ const deleteDesk = (row) => {
             <el-table-column label="序号" width="100" type="index"> </el-table-column>
             <el-table-column label="桌名" prop="title"></el-table-column>
             <el-table-column label="状态" prop="state"></el-table-column>
-            <el-table-column label="操作" width="100">
+            <el-table-column label="操作" width="200">
                 <template #default="{ row }">
                     <el-button :icon="Edit" circle plain type="primary" @click="showDialog(row)"></el-button>
                     <el-button :icon="Delete" circle plain type="danger" @click="deleteDesk(row)"></el-button>
@@ -188,10 +191,19 @@ const deleteDesk = (row) => {
             @size-change="onSizeChange" style="margin-top: 20px; justify-content: flex-end">
         </el-pagination>
 
+        <!-- 添加点餐弹窗 -->
+        <el-dialog v-model="chooseVisible" :title="title" width="60%">
+            <template #footer>
+                <span class="dialog-footer">
+                    <el-button @click="chooseVisible = false">取消</el-button>
+                    <el-button type="primary" @click="title == '添加餐桌' ? addfooddetail() : updatefooddetail()"> 确认 </el-button>
+                </span>
+            </template>
+        </el-dialog>
 
         <!-- 添加分类弹窗 -->
         <el-dialog v-model="dialogVisible" :title="title" width="30%">
-            <el-form :model="categoryModel" :rules="rules" label-width="100px" style="padding-right: 30px">
+            <el-form :model="deskModel" :rules="rules" label-width="100px" style="padding-right: 30px">
                 <el-form-item label="桌名" prop="title">
                     <el-input v-model="deskModel.title" minlength="1" maxlength="10"></el-input>
                 </el-form-item>

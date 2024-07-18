@@ -2,6 +2,9 @@
 import { User, Lock } from '@element-plus/icons-vue'
 import { ref } from 'vue'
 import { ElMessage } from 'element-plus'
+
+//控制用户权限
+const value1 = ref(true)
 //控制注册与登录表单的显示， 默认显示注册
 const isRegister = ref(false)
 //定义数据模型
@@ -74,7 +77,12 @@ const login =async ()=>{
    //把得到的token存储到pinia中
    tokenStore.setToken(result.data)
    //跳转到首页 路由完成跳转
-   router.push('/')
+
+   if (value1.value) {
+        router.push('/employ');
+      } else {
+        router.push('/');
+      }
 }
 
 //定义函数,清空数据模型的数据
@@ -114,7 +122,8 @@ const clearRegisterData = ()=>{
                     </el-button>
                 </el-form-item>
                 <el-form-item class="flex">
-                    <el-link ref="ToLogin" type="info" :underline="false" @click="isRegister = false;clearRegisterData()">
+                    <el-link ref="ToLogin" type="info" :underline="false"
+                        @click="isRegister = false;clearRegisterData()">
                         ← 返回
                     </el-link>
                 </el-form-item>
@@ -128,7 +137,8 @@ const clearRegisterData = ()=>{
                     <el-input :prefix-icon="User" placeholder="请输入用户名" v-model="registerData.username"></el-input>
                 </el-form-item>
                 <el-form-item prop="password">
-                    <el-input name="password" :prefix-icon="Lock" type="password" placeholder="请输入密码" v-model="registerData.password"></el-input>
+                    <el-input name="password" :prefix-icon="Lock" type="password" placeholder="请输入密码"
+                        v-model="registerData.password"></el-input>
                 </el-form-item>
                 <el-form-item class="flex">
                     <div class="flex">
@@ -146,6 +156,7 @@ const clearRegisterData = ()=>{
                     </el-link>
                 </el-form-item>
             </el-form>
+            <el-switch v-model="value1" class="mb-2" active-text="员工" inactive-text="管理员" />
         </el-col>
     </el-row>
 </template>
@@ -157,8 +168,7 @@ const clearRegisterData = ()=>{
     background-color: #fff;
 
     .bg {
-        background: url('@/assets/logo2.png') no-repeat 60% center / 240px auto,
-            url('@/assets/login_bg.jpg') no-repeat center / cover;
+        background: url('@/assets/login_bg.jpg') no-repeat center / cover;
         border-radius: 0 20px 20px 0;
     }
 

@@ -23,5 +23,35 @@ export default defineConfig({
           rewrite:(path)=>path.replace(/^\/api/,'')///api替换为''
       }
     }
-  }
+  },
+
+  build: {
+    outDir: 'dist',
+
+    rollupOptions: {
+
+      output: {
+/*         manualChunks(id) {
+          // 根据需要自定义拆分文件的规则
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
+        dir: 'dist', // 输出到 dist 目录
+        entryFileNames: '[name].js', // 入口文件名使用原始名称
+        assetFileNames: 'assets/[name].[ext]', // 资源文件夹使用 assets 子目录
+        chunkFileNames: 'chunks/[name].js', // 拆分的文件使用 chunks 子目录 */
+      },
+    },
+  },
+
+/*   configureWebpack: {
+    optimization: {
+      splitChunks: {
+        chunks: 'all',
+      },
+    },
+  }, */
 })
+
+

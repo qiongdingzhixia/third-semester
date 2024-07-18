@@ -39,10 +39,25 @@ instance.interceptors.response.use(
         if(result.data.code===0){
             return result.data;
         }
-
+        console.log(result.data.message);   
+        if(result.data.message.includes("createDesk")){
+            ElMessage.error('请选择桌号')
+        }
         //操作失败
-        //alert(result.data.msg?result.data.msg:'服务异常')
-        ElMessage.error(result.data.message?result.data.message:'服务异常')
+        //alert(result.data.msg?result.data.msg:'服务异常')x
+        else if(result.data.message.includes(".foodorder.id,NotNull.id")){
+            ElMessage.error('请先查看订单信息是否正确')
+        }
+        else if(result.data.message.includes("NotNull.createOrder")){
+            ElMessage.error('异常退出，请联系员工删除已有订单继续点餐，请勿轻易退出点单界面')
+        }
+        else if(result.data.message.includes("TooManyResultsException")){
+            ElMessage.error('请联系员工删除已有订单继续点餐，请勿轻易退出点单界面')
+        }
+        else{    
+                ElMessage.error(result.data.message?result.data.message:'服务异常')
+            }
+
         //异步操作的状态转换为失败
         return Promise.reject(result.data)
         

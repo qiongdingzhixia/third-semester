@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 //导入组件
 import LoginVue from '@/views/Login.vue'
 import LayoutVue from '@/views/Layout.vue'
+import LayoutEmployVue from '@/views/LayoutEmploy.vue'
 
 import ArticleCategoryVue from '@/views/article/ArticleCategory.vue'
 import ArticleManageVue from '@/views/article/ArticleManage.vue'
@@ -11,19 +12,30 @@ import UserInfoVue from '@/views/user/UserInfo.vue'
 import UserResetPasswordVue from '@/views/user/UserResetPassword.vue'
 import DeskVue from '@/views/desk/Desk.vue'
 import OrderVue from '@/views/order/Order.vue'
+import ChooseVue from '@/views/order/Choose.vue'
+
 
 //定义路由关系
 const routes = [
     { path: '/login', component: LoginVue },
+
     {
-        path: '/', component: LayoutVue,redirect:'/article/manage', children: [
+        path: '/', component: LayoutVue,redirect:'/article/category', children: [
             { path: '/article/category', component: ArticleCategoryVue },
             { path: '/article/manage', component: ArticleManageVue },
             { path: '/user/info', component: UserInfoVue },
             { path: '/user/avatar', component: UserAvatarVue },
             { path: '/user/resetPassword', component: UserResetPasswordVue },
             { path: '/desk',component: DeskVue},
+            { path: '/choose',component: ChooseVue},
             { path: '/foodorder',component: OrderVue}
+        ]
+    },
+
+    { 
+        path: '/employ', component: LayoutEmployVue, redirect:'/employ/choose', children: [
+            { path: '/employ/choose', component: ChooseVue },
+            { path: '/employ/foodorder',component: OrderVue}
         ]
     }
 ]

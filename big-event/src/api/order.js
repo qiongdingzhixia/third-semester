@@ -6,6 +6,11 @@ export const orderListService = (params)=>{
    return  request.get('/foodorder',{params:params})
 }
 
+//订单查询
+export const orderIdService = (params)=>{
+    return  request.get('/foodorder/detailId',{params:params})
+ }
+
 //订单添加
 export const orderAddService = (orderData)=>{
     return request.post('/foodorder',orderData);
